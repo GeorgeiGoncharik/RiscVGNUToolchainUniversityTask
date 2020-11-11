@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 LABEL maintainer="georgii.goncharik@gmail.com"
 LABEL version="0.1"
-LABEL description="docker-container with RISC-V GNU Compiler Toolchain (Linux 64-bit)"
+LABEL description="docker-container with RISC-V GNU Compiler Toolchain (Linux 32-bit)"
 
 ENV RISCV=/opt/riscv
 ENV SRCDIR=/tmp/riscv-tools
@@ -10,8 +10,6 @@ ENV PROJDIR=/riscv-projects
 ENV PATH=$RISCV/bin:$PATH
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG ARCH
-ARG ABI 
 
 RUN apt-get update
 RUN apt-get install -y autoconf automake autotools-dev curl \
