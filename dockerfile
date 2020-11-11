@@ -10,8 +10,6 @@ ENV PROJDIR=/riscv-projects
 ENV PATH=$RISCV/bin:$PATH
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG ARCH
-ARG ABI 
 
 RUN apt-get update
 RUN apt-get install -y autoconf automake autotools-dev curl \
