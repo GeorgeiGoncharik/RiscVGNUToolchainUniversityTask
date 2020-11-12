@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 LABEL maintainer="georgii.goncharik@gmail.com"
 LABEL version="0.1"
-LABEL description="docker-container with RISC-V GNU Compiler Toolchain (Linux 32-bit)"
+LABEL description="docker-container with RISC-V GNU Compiler Toolchain (newlib)"
 
 ENV RISCV=/opt/riscv
 ENV SRCDIR=/tmp/riscv-tools
@@ -20,9 +20,9 @@ RUN apt-get install -y git
 WORKDIR $SRCDIR
 RUN git clone https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR $SRCDIR/riscv-gnu-toolchain
-RUN git -c submodule."qemu".update=none -c submodule."riscv-newlib".update=none submodule update --init --recursive
+RUN git -c submodule."qemu".update=none submodule update --init --recursive
 
-RUN ./configure --prefix=${RISCV} --with-xlen=32 --with-arch=rv32gc && make linux
+RUN ./configure --prefix=${RISCV} && make
 
 WORKDIR $SRCDIR
 RUN rm -r -f riscv-gnu-toolchain
