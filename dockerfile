@@ -22,7 +22,7 @@ RUN git clone https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR $SRCDIR/riscv-gnu-toolchain
 RUN git -c submodule."qemu".update=none -c submodule."riscv-newlib".update=none submodule update --init --recursive
 
-RUN ./configure --prefix=${RISCV} && make XLEN=32 linux
+RUN ./configure --prefix=${RISCV} --with-xlen=32 --with-arch=rv32gc && make linux
 
 WORKDIR $SRCDIR
 RUN rm -r -f riscv-gnu-toolchain
