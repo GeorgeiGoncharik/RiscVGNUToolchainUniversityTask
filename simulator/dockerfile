@@ -1,0 +1,25 @@
+FROM newlib:64
+
+RUN apt-get update
+RUN apt-get install -y device-tree-compiler
+
+ENV SIMSRC=/tmp/sim
+ENV PATH=$SIMSRC/riscv-isa-sim/build/:$PATH
+WORKDIR ${SIMSRC}
+
+RUN git clone https://github.com/riscv/riscv-pk
+RUN git clone https://github.com/riscv/riscv-isa-sim
+
+WORKDIR ${SIMSRC}/riscv-pk
+RUN mkdir build
+WORKDIR ${SIMSRC}/riscv-pk/build
+RUN ../configure --prefix=$RISCV --host=riscv64-unknown-elf
+RUN make && make install
+
+WORKDIR ${SIMSRC}/riscv-isa-sim
+RUN mkdir build
+WORKDIR ${SIMSRC}/riscv-isa-sim/build
+RUN ../configure --prefix=$RISCV --enable-histogram
+RUN make && make install
+
+WORKDIR $PROJDIR
