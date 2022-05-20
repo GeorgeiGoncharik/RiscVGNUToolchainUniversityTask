@@ -1,4 +1,4 @@
-# Курсовая работа по АВС. 5 семестр
+# Risc-V GNU Toolchain Docker Image
 
 
 ### Описание
